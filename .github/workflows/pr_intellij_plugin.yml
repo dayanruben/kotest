@@ -8,69 +8,43 @@ on:
 
 jobs:
    build:
-      if: github.repository == 'kotest/kotest'
       runs-on: ubuntu-latest
-            if: github.repository == 'kotest/kotest'
 
       strategy:
-            if: github.repository == 'kotest/kotest'
          matrix:
-                  if: github.repository == 'kotest/kotest'
             product: [ "IC-251", "IC-252", "IC-253", "IC-261" ]
-                        if: github.repository == 'kotest/kotest'
          max-parallel: 10
-                  if: github.repository == 'kotest/kotest'
          fail-fast: false
-                  if: github.repository == 'kotest/kotest'
 
       steps:
-            if: github.repository == 'kotest/kotest'
          -  uses: actions/checkout@v6
             with:
-                        if: github.repository == 'kotest/kotest'
                fetch-depth: 0
-                              if: github.repository == 'kotest/kotest'
 
          -  uses: actions/setup-java@v5
             with:
-                        if: github.repository == 'kotest/kotest'
                java-version: "21"
-                              if: github.repository == 'kotest/kotest'
                distribution: "temurin"
-                              if: github.repository == 'kotest/kotest'
 
          -  name: Override Kotlin version for IC-261
             if: matrix.product == 'IC-261'
-                        if: github.repository == 'kotest/kotest'
             run: sed -i 's/^kotlin = .*/kotlin = "2.3.10"/' gradle/libs.versions.toml
-                        if: github.repository == 'kotest/kotest'
 
          -  name: Run tests
             run: ./gradlew :kotest-intellij-plugin:check
-                        if: github.repository == 'kotest/kotest'
             env:
-                        if: github.repository == 'kotest/kotest'
                PRODUCT_NAME: ${{ matrix.product }}
-                              if: github.repository == 'kotest/kotest'
 
          -  name: Bundle the build report
             if: failure()
-                        if: github.repository == 'kotest/kotest'
             run: find . -type d -name 'reports' | zip -@ -r build-reports.zip
-                        if: github.repository == 'kotest/kotest'
 
          -  name: Upload the build report
             if: failure()
-                        if: github.repository == 'kotest/kotest'
             uses: actions/upload-artifact@master
-                        if: github.repository == 'kotest/kotest'
             with:
-                        if: github.repository == 'kotest/kotest'
                name: error-report
-                              if: github.repository == 'kotest/kotest'
                path: build-reports.zip
-                              if: github.repository == 'kotest/kotest'
 
 env:
    GRADLE_OPTS: -Dorg.gradle.configureondemand=true -Dorg.gradle.parallel=false -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx3g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
-      if: github.repository == 'kotest/kotest'

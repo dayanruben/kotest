@@ -5,52 +5,33 @@ on:
 
 jobs:
    release:
-      if: github.repository == 'kotest/kotest'
 
       strategy:
-            if: github.repository == 'kotest/kotest'
          matrix:
-                  if: github.repository == 'kotest/kotest'
             product: [ "IC-251", "IC-252", "IC-253", "IC-261" ]
-                        if: github.repository == 'kotest/kotest'
          max-parallel: 1
-                  if: github.repository == 'kotest/kotest'
 
       runs-on: ubuntu-latest
-            if: github.repository == 'kotest/kotest'
 
       steps:
-            if: github.repository == 'kotest/kotest'
          -  uses: actions/checkout@v6
             with:
-                        if: github.repository == 'kotest/kotest'
                fetch-depth: 0
-                              if: github.repository == 'kotest/kotest'
 
          -  uses: actions/setup-java@v5
             with:
-                        if: github.repository == 'kotest/kotest'
                java-version: "21"
-                              if: github.repository == 'kotest/kotest'
                distribution: "temurin"
-                              if: github.repository == 'kotest/kotest'
 
          -  name: Override Kotlin version for IC-261
             if: matrix.product == 'IC-261'
-                        if: github.repository == 'kotest/kotest'
             run: sed -i 's/^kotlin = .*/kotlin = "2.3.10"/' gradle/libs.versions.toml
-                        if: github.repository == 'kotest/kotest'
 
          -  name: deploy to jetbrains
             run: ./gradlew --stacktrace publishPlugin
-                        if: github.repository == 'kotest/kotest'
             env:
-                        if: github.repository == 'kotest/kotest'
                PRODUCT_NAME: ${{ matrix.product }}
-                              if: github.repository == 'kotest/kotest'
 
 env:
    GRADLE_OPTS: -Dorg.gradle.configureondemand=true -Dorg.gradle.parallel=false -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx3g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
-      if: github.repository == 'kotest/kotest'
    JETBRAINS_TOKEN: ${{ secrets.JETBRAINS_TOKEN }}
-      if: github.repository == 'kotest/kotest'

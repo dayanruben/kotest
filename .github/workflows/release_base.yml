@@ -23,17 +23,11 @@ permissions:
 
 jobs:
    publish_base:
-      if: github.repository == 'kotest/kotest'
       runs-on: ubuntu-latest
-            if: github.repository == 'kotest/kotest'
       strategy:
-            if: github.repository == 'kotest/kotest'
          max-parallel: 1
-                  if: github.repository == 'kotest/kotest'
          matrix:
-                  if: github.repository == 'kotest/kotest'
             target:
-                        if: github.repository == 'kotest/kotest'
                - publishKotlinMultiplatformPublicationToDeployRepository
                - publishJvmPublicationToDeployRepository
                - publishJsPublicationToDeployRepository
@@ -46,27 +40,18 @@ jobs:
                - publishAndroidNativeArm32PublicationToDeployRepository
                - publishAndroidNativeArm64PublicationToDeployRepository
       steps:
-            if: github.repository == 'kotest/kotest'
          -  name: Checkout the repo
             uses: actions/checkout@v4
-                        if: github.repository == 'kotest/kotest'
             with:
-                        if: github.repository == 'kotest/kotest'
                ref: ${{ inputs.branch }}
-                              if: github.repository == 'kotest/kotest'
 
          -  name: Setup JDK
             uses: actions/setup-java@v4
-                        if: github.repository == 'kotest/kotest'
             with:
-                        if: github.repository == 'kotest/kotest'
                distribution: "temurin"
-                              if: github.repository == 'kotest/kotest'
                java-version-file: .github/.java-version
-                              if: github.repository == 'kotest/kotest'
 
          -  uses: gradle/actions/setup-gradle@v4
 
          -  name: publish
             run: ./gradlew ${{ matrix.target }}
-                        if: github.repository == 'kotest/kotest'
