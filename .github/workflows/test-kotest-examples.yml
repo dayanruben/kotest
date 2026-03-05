@@ -16,6 +16,7 @@ env:
 
 jobs:
    publish-local-linux:
+     if: github.repository == 'kotest/kotest'
       name: Publish Kotest to Maven Local (Linux)
       runs-on: ubuntu-latest
       if: github.repository == 'kotest/kotest'
@@ -69,6 +70,7 @@ jobs:
               retention-days: 1
 
    publish-local-macos:
+     if: github.repository == 'kotest/kotest'
       name: Publish Kotest to Maven Local (macOS)
       runs-on: macos-latest
       if: github.repository == 'kotest/kotest'
@@ -125,6 +127,7 @@ jobs:
               retention-days: 1
 
    publish-local-windows:
+     if: github.repository == 'kotest/kotest'
       name: Publish Kotest to Maven Local (Windows)
       runs-on: windows-latest
       if: github.repository == 'kotest/kotest'

@@ -5,6 +5,7 @@ on:
 
 jobs:
    release:
+     if: github.repository == 'kotest/kotest'
 
       strategy:
          matrix:

@@ -18,6 +18,7 @@ permissions:
 
 jobs:
   release-plugin:
+    if: github.repository == 'kotest/kotest'
     runs-on: ubuntu-latest
     if: github.repository == 'kotest/kotest'
 

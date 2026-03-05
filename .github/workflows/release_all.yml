@@ -30,6 +30,7 @@ permissions:
 
 jobs:
    publish:
+     if: github.repository == 'kotest/kotest'
       strategy:
          # Not sure if this is still true on new maven central, perhaps parallel uploads are now supported?
          fail-fast: false

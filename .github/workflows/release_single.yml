@@ -18,6 +18,7 @@ on:
 
 jobs:
    release:
+     if: github.repository == 'kotest/kotest'
       runs-on: ubuntu-latest
 
       steps:

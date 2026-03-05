@@ -23,6 +23,7 @@ permissions:
 
 jobs:
    publish_tvos:
+     if: github.repository == 'kotest/kotest'
       uses: ./.github/workflows/run-gradle.yml
       secrets: inherit
       with:
