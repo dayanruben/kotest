@@ -11,19 +11,30 @@ permissions:
 
 jobs:
    deploy:
+      if: github.repository == 'kotest/kotest'
       permissions:
+            if: github.repository == 'kotest/kotest'
         contents: write  # for Git to git push
+                if: github.repository == 'kotest/kotest'
       runs-on: ubuntu-latest
+            if: github.repository == 'kotest/kotest'
       steps:
+            if: github.repository == 'kotest/kotest'
          -  uses: actions/checkout@v4
          -  uses: actions/setup-node@v4
             with:
+                        if: github.repository == 'kotest/kotest'
                node-version: '18.4.0'
+                              if: github.repository == 'kotest/kotest'
          -  name: Release to GitHub Pages
             env:
+                        if: github.repository == 'kotest/kotest'
                USE_SSH: true
+                              if: github.repository == 'kotest/kotest'
                GIT_USER: git
+                              if: github.repository == 'kotest/kotest'
             run: |
+                        if: github.repository == 'kotest/kotest'
                git config user.name github-actions
                git config user.email github-actions@github.com
                npm --prefix documentation ci

@@ -30,74 +30,106 @@ permissions:
 
 jobs:
    publish:
+      if: github.repository == 'kotest/kotest'
       strategy:
+            if: github.repository == 'kotest/kotest'
          # Not sure if this is still true on new maven central, perhaps parallel uploads are now supported?
          fail-fast: false
+                  if: github.repository == 'kotest/kotest'
          matrix:
+                  if: github.repository == 'kotest/kotest'
             include:
+                        if: github.repository == 'kotest/kotest'
                # KMP
                -  os: ubuntu-latest
                   args: -P"kotest_enabledPublicationNamePrefixes=KotlinMultiplatform"
+                                    if: github.repository == 'kotest/kotest'
                # JVM
                -  os: ubuntu-latest
                   args: -P"kotest_enabledPublicationNamePrefixes=jvm"
+                                    if: github.repository == 'kotest/kotest'
                # JS
                -  os: ubuntu-latest
                   args: -P"kotest_enabledPublicationNamePrefixes=js"
+                                    if: github.repository == 'kotest/kotest'
                # Linux
                -  os: ubuntu-latest
                   args: -P"kotest_enabledPublicationNamePrefixes=linux"
+                                    if: github.repository == 'kotest/kotest'
                # Wasm
                -  os: ubuntu-latest
                   args: -P"kotest_enabledPublicationNamePrefixes=wasm"
+                                    if: github.repository == 'kotest/kotest'
                # Publish 'common' components (KotlinMultiplatform,jvm,js) only on Linux, to avoid duplicate publications
                -  os: ubuntu-latest
                   args: -P"kotest_enabledPublicationNamePrefixes=android"
+                                    if: github.repository == 'kotest/kotest'
                # Kotest BOM
                -  os: ubuntu-latest
                   args: -P"kotest_enabledPublicationNamePrefixes=KotestBom"
+                                    if: github.repository == 'kotest/kotest'
 
                # Windows: MinGW
                -  os: windows-latest
                   args: -P"kotest_enabledPublicationNamePrefixes=mingw"
+                                    if: github.repository == 'kotest/kotest'
 
                # Apple: macOS
                -  os: macos-latest
                   args: -P"kotest_enabledPublicationNamePrefixes=macOS"
+                                    if: github.repository == 'kotest/kotest'
                # Apple: iOS
                -  os: macos-latest
                   args: -P"kotest_enabledPublicationNamePrefixes=iOS"
+                                    if: github.repository == 'kotest/kotest'
                # Apple: tvOS
                -  os: macos-latest
                   args: -P"kotest_enabledPublicationNamePrefixes=tvOS"
+                                    if: github.repository == 'kotest/kotest'
                # Apple: watchOS
                -  os: macos-latest
                   args: -P"kotest_enabledPublicationNamePrefixes=watchOS"
+                                    if: github.repository == 'kotest/kotest'
 
 
       uses: ./.github/workflows/run-gradle.yml
+            if: github.repository == 'kotest/kotest'
       secrets: inherit
+            if: github.repository == 'kotest/kotest'
       with:
+            if: github.repository == 'kotest/kotest'
          ref: refs/tags/${{ inputs.version }}
+                  if: github.repository == 'kotest/kotest'
          task: >
+                  if: github.repository == 'kotest/kotest'
             -P"kotest_enableKotlinJs=true"
             -P"kotest_enableKotlinNative=true"
             ${{ matrix.args }}
             --no-configuration-cache
             publishToAppropriateCentralRepository
          runs-on: ${{ matrix.os }}
+                  if: github.repository == 'kotest/kotest'
 
    tag:
+      if: github.repository == 'kotest/kotest'
       needs: publish
+            if: github.repository == 'kotest/kotest'
       runs-on: ubuntu-latest
+            if: github.repository == 'kotest/kotest'
       steps:
+            if: github.repository == 'kotest/kotest'
          -  uses: actions/checkout@v4
             with:
+                        if: github.repository == 'kotest/kotest'
                ref: ${{ inputs.branch }}
+                              if: github.repository == 'kotest/kotest'
                fetch-depth: 0
+                              if: github.repository == 'kotest/kotest'
          -  name: Create and push tag
             shell: bash
+                        if: github.repository == 'kotest/kotest'
             run: |
+                        if: github.repository == 'kotest/kotest'
                set -euo pipefail
                git config --global user.email "sam@sksamuel.com"
                git config --global user.name "Kotest Release Bot"

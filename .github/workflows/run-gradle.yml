@@ -27,80 +27,129 @@ permissions:
 
 jobs:
    gradle:
+      if: github.repository == 'kotest/kotest'
       runs-on: ${{ inputs.runs-on }}
+            if: github.repository == 'kotest/kotest'
       steps:
+            if: github.repository == 'kotest/kotest'
          -  name: "Set KONAN_DATA_DIR (windows)" # This sets the path to a folder named .konan in the user's home directory
             if: runner.os == 'Windows'
+                        if: github.repository == 'kotest/kotest'
             shell: powershell
+                        if: github.repository == 'kotest/kotest'
             run: |
+                        if: github.repository == 'kotest/kotest'
                "KONAN_DATA_DIR=${{ github.workspace }}\.konan" >> $env:GITHUB_ENV
 
          -  name: "Set KONAN_DATA_DIR (bash)"
             if: runner.os != 'Windows'
+                        if: github.repository == 'kotest/kotest'
             run: |
+                        if: github.repository == 'kotest/kotest'
                echo "KONAN_DATA_DIR=${{ github.workspace }}/.konan" >> $GITHUB_ENV
 
          -  name: Checkout the repo
             uses: actions/checkout@v6
+                        if: github.repository == 'kotest/kotest'
             with:
+                        if: github.repository == 'kotest/kotest'
                ref: ${{ github.event.inputs.ref }}
+                              if: github.repository == 'kotest/kotest'
 
          -  name: Setup JDK
             uses: actions/setup-java@v5
+                        if: github.repository == 'kotest/kotest'
             with:
+                        if: github.repository == 'kotest/kotest'
                distribution: "temurin"
+                              if: github.repository == 'kotest/kotest'
                java-version-file: .github/.java-version
+                              if: github.repository == 'kotest/kotest'
 
          -  name: Setup Gradle
             uses: gradle/actions/setup-gradle@v5
+                        if: github.repository == 'kotest/kotest'
             with:
+                        if: github.repository == 'kotest/kotest'
                cache-encryption-key: ${{ secrets.GRADLE_CONFIGURATION_CACHE_ENCRYPTION_KEY }}
+                              if: github.repository == 'kotest/kotest'
                cache-read-only: ${{ inputs.cache-read-only }}
+                              if: github.repository == 'kotest/kotest'
 
          -  name: Cache Kotlin Konan
             uses: actions/cache@v5
+                        if: github.repository == 'kotest/kotest'
             with:
+                        if: github.repository == 'kotest/kotest'
                path: ${{ env.KONAN_DATA_DIR }}
+                              if: github.repository == 'kotest/kotest'
                key: kotlin-konan-${{ runner.os }}
+                              if: github.repository == 'kotest/kotest'
                enableCrossOsArchive: true
+                              if: github.repository == 'kotest/kotest'
                restore-keys: |
+                              if: github.repository == 'kotest/kotest'
                   kotlin-konan-
 
          -  name: Cache Kotest user directory
             uses: actions/cache@v5
+                        if: github.repository == 'kotest/kotest'
             with:
+                        if: github.repository == 'kotest/kotest'
                path: ~/.kotest
+                              if: github.repository == 'kotest/kotest'
                key: kotest-user-dir-${{ runner.os }}
+                              if: github.repository == 'kotest/kotest'
                enableCrossOsArchive: true
+                              if: github.repository == 'kotest/kotest'
                restore-keys: |
+                              if: github.repository == 'kotest/kotest'
                   kotest-user-dir-
 
          -  name: Gradle ${{ inputs.task }}
             run: ./gradlew ${{ inputs.task }}
+                        if: github.repository == 'kotest/kotest'
             shell: bash
+                        if: github.repository == 'kotest/kotest'
 
          -  name: Test report PR check
             uses: mikepenz/action-junit-report@v6
             if: always() && github.event_name == 'pull_request' # always run even if the previous step fails
+                        if: github.repository == 'kotest/kotest'
             with:
+                        if: github.repository == 'kotest/kotest'
                report_paths: '**/build/test-results/jvmTest/TEST-*.xml'
+                              if: github.repository == 'kotest/kotest'
 
          -  name: Upload build reports
             if: failure()
+                        if: github.repository == 'kotest/kotest'
             uses: actions/upload-artifact@v5
+                        if: github.repository == 'kotest/kotest'
             with:
+                        if: github.repository == 'kotest/kotest'
                name: build-reports-${{ runner.os }}-${{ github.action }}-${{ github.run_id }}
+                              if: github.repository == 'kotest/kotest'
                path: |
+                              if: github.repository == 'kotest/kotest'
                   **/build/reports/
                   **/*.hprof
                   **/*.log
                if-no-files-found: ignore
+                              if: github.repository == 'kotest/kotest'
 
 env:
    RELEASE_VERSION: ${{ github.event.inputs.version }}
+      if: github.repository == 'kotest/kotest'
    ORG_GRADLE_PROJECT_signingKey: ${{ secrets.SIGNING_KEY }}
+      if: github.repository == 'kotest/kotest'
    ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SIGNING_PASSWORD }}
+      if: github.repository == 'kotest/kotest'
    ORG_GRADLE_PROJECT_Kotest_GradleBuildCache_user: ${{ secrets.GRADLE_BUILD_CACHE_USER }}
+      if: github.repository == 'kotest/kotest'
    ORG_GRADLE_PROJECT_Kotest_GradleBuildCache_pass: ${{ secrets.GRADLE_BUILD_CACHE_PASS }}
+      if: github.repository == 'kotest/kotest'
    NEW_MAVEN_CENTRAL_USERNAME: ${{ secrets.NEW_MAVEN_CENTRAL_USERNAME }}
+      if: github.repository == 'kotest/kotest'
    NEW_MAVEN_CENTRAL_PASSWORD: ${{ secrets.NEW_MAVEN_CENTRAL_PASSWORD }}
+      if: github.repository == 'kotest/kotest'

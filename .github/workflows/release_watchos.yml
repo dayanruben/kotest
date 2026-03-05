@@ -23,14 +23,21 @@ permissions:
 
 jobs:
    publish_watchos:
+      if: github.repository == 'kotest/kotest'
       uses: ./.github/workflows/run-gradle.yml
+            if: github.repository == 'kotest/kotest'
       secrets: inherit
+            if: github.repository == 'kotest/kotest'
       with:
+            if: github.repository == 'kotest/kotest'
          ref: ${{ inputs.ref }}
+                  if: github.repository == 'kotest/kotest'
          task: >
+                  if: github.repository == 'kotest/kotest'
             -P"kotest_enableKotlinJs=true"
             -P"kotest_enableKotlinNative=true"
             -P"kotest_enabledPublicationNamePrefixes=watchOS"
             --no-configuration-cache
             publishToAppropriateCentralRepository
          runs-on: macos-latest
+                  if: github.repository == 'kotest/kotest'

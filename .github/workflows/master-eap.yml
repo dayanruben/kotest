@@ -14,86 +14,134 @@ env:
 
 jobs:
    check:
+      if: github.repository == 'kotest/kotest'
       name: "Check (${{ matrix.name }})"
+            if: github.repository == 'kotest/kotest'
       runs-on: ${{ matrix.os }}
+            if: github.repository == 'kotest/kotest'
       continue-on-error: true
+            if: github.repository == 'kotest/kotest'
       strategy:
+            if: github.repository == 'kotest/kotest'
          matrix:
+                  if: github.repository == 'kotest/kotest'
             include:
+                        if: github.repository == 'kotest/kotest'
                # JVM-only
                -  os: ubuntu-latest
                   args: -P"jvmOnly=true"
+                                    if: github.repository == 'kotest/kotest'
                   name: jvm
+                                    if: github.repository == 'kotest/kotest'
                # Js+Wasm
                -  os: ubuntu-latest
                   args: -P"kotest_enableKotlinJs=true"
+                                    if: github.repository == 'kotest/kotest'
                   name: js-wasm
+                                    if: github.repository == 'kotest/kotest'
                # Linux+Android
                -  os: ubuntu-latest
                   args: -P"kotest_enableKotlinNative=true"
+                                    if: github.repository == 'kotest/kotest'
                   name: linux-native
+                                    if: github.repository == 'kotest/kotest'
                # Windows: MinGW
                -  os: windows-latest
                   args: -P"kotest_enableKotlinNative=true"
+                                    if: github.repository == 'kotest/kotest'
                   name: windows-native
+                                    if: github.repository == 'kotest/kotest'
                # Apple: macOS/iOS/tvOS/watchOS
                -  os: macos-latest
                   args: -P"kotest_enableKotlinNative=true"
+                                    if: github.repository == 'kotest/kotest'
                   name: apple-native
+                                    if: github.repository == 'kotest/kotest'
       steps:
+            if: github.repository == 'kotest/kotest'
          -  name: "Set KONAN_DATA_DIR (windows)"
             if: runner.os == 'Windows'
+                        if: github.repository == 'kotest/kotest'
             shell: cmd
+                        if: github.repository == 'kotest/kotest'
             run: |
+                        if: github.repository == 'kotest/kotest'
                echo KONAN_DATA_DIR=C:\Users\runneradmin\.konan>>%GITHUB_ENV%
 
          -  name: "Set KONAN_DATA_DIR (bash)"
             if: runner.os != 'Windows'
+                        if: github.repository == 'kotest/kotest'
             run: |
+                        if: github.repository == 'kotest/kotest'
                echo "KONAN_DATA_DIR=${HOME}/.konan" >> $GITHUB_ENV
 
          -  name: Checkout the repo
             uses: actions/checkout@v5
+                        if: github.repository == 'kotest/kotest'
 
          -  name: Override Kotlin version
             shell: bash
+                        if: github.repository == 'kotest/kotest'
             run: |
+                        if: github.repository == 'kotest/kotest'
                echo "Overriding Kotlin version to: $KOTLIN_VERSION"
                sed -i "s/^kotlin = .*/kotlin = \"$KOTLIN_VERSION\"/" gradle/libs.versions.toml
 
          -  name: Setup JDK
             uses: actions/setup-java@v5
+                        if: github.repository == 'kotest/kotest'
             with:
+                        if: github.repository == 'kotest/kotest'
                distribution: "temurin"
+                              if: github.repository == 'kotest/kotest'
                java-version-file: .github/.java-version
+                              if: github.repository == 'kotest/kotest'
 
          -  name: Setup Gradle
             uses: gradle/actions/setup-gradle@v5
+                        if: github.repository == 'kotest/kotest'
             with:
+                        if: github.repository == 'kotest/kotest'
                gradle-home-cache-cleanup: true
+                              if: github.repository == 'kotest/kotest'
                cache-encryption-key: ${{ secrets.GRADLE_CONFIGURATION_CACHE_ENCRYPTION_KEY }}
+                              if: github.repository == 'kotest/kotest'
 
          -  name: Cache Kotlin Konan
             uses: actions/cache@v4
+                        if: github.repository == 'kotest/kotest'
             with:
+                        if: github.repository == 'kotest/kotest'
                path: ${{ env.KONAN_DATA_DIR }}
+                              if: github.repository == 'kotest/kotest'
                key: kotlin-konan-${{ runner.os }}
+                              if: github.repository == 'kotest/kotest'
                enableCrossOsArchive: true
+                              if: github.repository == 'kotest/kotest'
                restore-keys: |
+                              if: github.repository == 'kotest/kotest'
                   kotlin-konan-
 
          -  name: Cache Kotest user directory
             uses: actions/cache@v4
+                        if: github.repository == 'kotest/kotest'
             with:
+                        if: github.repository == 'kotest/kotest'
                path: ~/.kotest
+                              if: github.repository == 'kotest/kotest'
                key: kotest-user-dir-${{ runner.os }}
+                              if: github.repository == 'kotest/kotest'
                enableCrossOsArchive: true
+                              if: github.repository == 'kotest/kotest'
                restore-keys: |
+                              if: github.repository == 'kotest/kotest'
                   kotest-user-dir-
 
          -  name: Run check
             shell: bash
+                        if: github.repository == 'kotest/kotest'
             run: >
+                        if: github.repository == 'kotest/kotest'
                ./gradlew
                -P"kotest_enableKotlinJs=false"
                -P"kotest_enableKotlinNative=false"
@@ -103,11 +151,17 @@ jobs:
 
          -  name: Upload build reports
             if: failure()
+                        if: github.repository == 'kotest/kotest'
             uses: actions/upload-artifact@v5
+                        if: github.repository == 'kotest/kotest'
             with:
+                        if: github.repository == 'kotest/kotest'
                name: build-reports-kotlin-beta-${{ matrix.name }}-${{ github.run_id }}
+                              if: github.repository == 'kotest/kotest'
                path: |
+                              if: github.repository == 'kotest/kotest'
                   **/build/reports/
                   **/*.hprof
                   **/*.log
                if-no-files-found: ignore
+                              if: github.repository == 'kotest/kotest'
