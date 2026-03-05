@@ -11,6 +11,7 @@ permissions:
 
 jobs:
    deploy:
+     if: github.repository == 'kotest/kotest'
       permissions:
         contents: write  # for Git to git push
       runs-on: ubuntu-latest

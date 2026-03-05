@@ -23,6 +23,7 @@ permissions:
 
 jobs:
    publish_base:
+     if: github.repository == 'kotest/kotest'
       runs-on: ubuntu-latest
       strategy:
          max-parallel: 1
