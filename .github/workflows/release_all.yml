@@ -89,6 +89,7 @@ jobs:
          runs-on: ${{ matrix.os }}
 
    tag:
+     if: github.repository == 'kotest/kotest'
       needs: publish
       runs-on: ubuntu-latest
       steps:

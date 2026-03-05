@@ -9,6 +9,7 @@ on:
 
 jobs:
    build:
+     if: github.repository == 'kotest/kotest'
       runs-on: ubuntu-latest
 
       strategy:
@@ -49,3 +50,4 @@ jobs:
 
 env:
    GRADLE_OPTS: -Dorg.gradle.configureondemand=true -Dorg.gradle.parallel=false -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx3g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
+     if: github.repository == 'kotest/kotest'

@@ -14,6 +14,7 @@ env:
 
 jobs:
    check:
+     if: github.repository == 'kotest/kotest'
       name: "Check (${{ matrix.name }})"
       runs-on: ${{ matrix.os }}
       continue-on-error: true

@@ -38,4 +38,6 @@ jobs:
 
 env:
    GRADLE_OPTS: -Dorg.gradle.configureondemand=true -Dorg.gradle.parallel=false -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx3g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
+     if: github.repository == 'kotest/kotest'
    JETBRAINS_TOKEN: ${{ secrets.JETBRAINS_TOKEN }}
+     if: github.repository == 'kotest/kotest'
