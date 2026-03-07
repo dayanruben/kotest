@@ -17,7 +17,7 @@ jobs:
      if: github.repository == 'kotest/kotest'
       name: "Check (${{ matrix.name }})"
       runs-on: ${{ matrix.os }}
-      continue-on-error: true
+      continue-on-error: false
       strategy:
          matrix:
             include:
