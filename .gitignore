@@ -70,3 +70,5 @@ node_modules/
 .intellijPlatform
 yarn.lock
 CLAUDE.md
+
+.junie

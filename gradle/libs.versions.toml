@@ -2,7 +2,7 @@
 gradleApi = "8.11.1"
 jaxbApi = "2.3.1"
 jedis = "7.1.0"
-kotlin = "2.2.21"
+kotlin = "2.3.20-RC3"
 
 runtime-kotest = "4.2.0" # intellij plugin
 test-kotest = "5.9.1"# intellij plugin
